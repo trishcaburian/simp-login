@@ -68,7 +68,8 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
     {
         $url = $this->router->generate('login_page');
 
-        return new RedirectResponse($url);
+        echo "<script>alert('Invalid User Details!')</script>";
+        header("Location:". $url);
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
