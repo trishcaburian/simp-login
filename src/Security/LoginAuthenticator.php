@@ -73,7 +73,7 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
     {
-        $url = $this->router->generate('verify_login');
+        $url = $this->router->generate('homepage');
 
         return new RedirectResponse($url);
     }
