@@ -1,3 +1,31 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+routing_test:
+    path: /test
+    controller: App\Controller\Controller:helloWorld
+
+#login_page:
+    #path: /login
+    #controller: App\Controller\Controller::checkLogin
+    #controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    #defaults:
+    #    template: 'pages/login.html.twig'
+
+login_page:
+    path: /login
+    controller: App\Controller\Controller::loginPage
+
+
+
+verify_login:
+    path: /homepage
+    controller: App\Controller\Controller::checkLogin
+
+authenticate:
+    path: /authenticate
+    controller: App\Security\LoginAuthenticator::checkLogin
+
+logout:
+    path: /logout
+    controller: App\Controller\Controller::logout
