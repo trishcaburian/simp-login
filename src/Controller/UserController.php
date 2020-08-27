@@ -5,7 +5,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-// use App\Entity\User;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -27,13 +27,13 @@ class UserController extends AbstractController
         $username = $request->request->get('reg_username');
         $password = $request->request->get('reg_password');
 
-        // $user = new User();
-        // $user->setUsername($username);
-        // $user->setPassword($password);
+        $user = new User();
+        $user->setUsername($username);
+        $user->setPassword($password);
 
-        // $this->entityManager->persist($user);
+        $this->entityManager->persist($user);
 
-        // $this->entityManager->flush();
+        $this->entityManager->flush();
 
         return new Response('added user '.$username);
     }
