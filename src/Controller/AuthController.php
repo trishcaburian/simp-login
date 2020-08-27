@@ -30,6 +30,10 @@ class AuthController extends AbstractController
     */
     public function loginPage(): Response
     {
+        if (!is_null($this->security->getUser())) { 
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
         return $this->render("pages/login.html.twig");
     }
 
@@ -38,12 +42,12 @@ class AuthController extends AbstractController
     */
     public function loadHomepage(): Response
     {
-        $username = $this->security->getUser()->getUsername();
+        $user = $this->security->getUser();
         
-        if (true) {
-            return $this->render("pages/home.html.twig", ['username' => $username]);
+        if (!is_null($user)) {
+            return $this->render("pages/home.html.twig", ['username' => $user->getUsername()]);
         } else {
-            return $this->redirect($this->generateUrl('login_page'));
+            return $this->redirect($this->generateUrl('app_login'));
         }
         
     }
@@ -53,6 +57,6 @@ class AuthController extends AbstractController
     */
     public function logout()
     {
-        return $this->redirect($this->generateUrl('login_page'));
+        return $this->redirect($this->generateUrl('app_login'));
     }
 }

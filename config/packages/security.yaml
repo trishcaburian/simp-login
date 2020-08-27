@@ -21,7 +21,7 @@ security:
             #     authenticators:
             #         - App\Security\LoginAuthenticator
             logout:
-                path: logout
+                path: app_logout
             guard:
                 authenticators:
                     - App\Security\LoginAuthenticator
