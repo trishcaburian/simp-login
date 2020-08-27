@@ -21,6 +21,7 @@ class LoginController extends AbstractController
     public function loadHomepage(): Response
     {
         // $username = $user->getUsername();
+        $username = "[]";
         
         if (true) {
             return $this->render("pages/home.html.twig", ["username" => $username]);
