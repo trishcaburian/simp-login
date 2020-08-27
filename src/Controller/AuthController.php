@@ -16,16 +16,6 @@ class AuthController extends AbstractController
     }
 
     /**
-    *   @Route("/", name="neutral_page")
-    */
-    public function index() 
-    {
-        //move with homepage to a new controller later
-        return $this->redirect($this->generateUrl('app_login'));
-
-    }
-
-    /**
     *   @Route("/auth/login", name="app_login")
     */
     public function loginPage(): Response
@@ -35,21 +25,6 @@ class AuthController extends AbstractController
         }
 
         return $this->render("pages/login.html.twig");
-    }
-
-    /**
-    *   @Route("/homepage", name="homepage")
-    */
-    public function loadHomepage(): Response
-    {
-        $user = $this->security->getUser();
-        
-        if (!is_null($user)) {
-            return $this->render("pages/home.html.twig", ['username' => $user->getUsername()]);
-        } else {
-            return $this->redirect($this->generateUrl('app_login'));
-        }
-        
     }
 
     /**
