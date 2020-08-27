@@ -3,7 +3,6 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class LoginController extends AbstractController
@@ -11,23 +10,19 @@ class LoginController extends AbstractController
     /**
     *   @Route("/login", name="login_page")
     */
-    public function loginPage(UserInterface $user): Response
+    public function loginPage(): Response
     {
-        if ($user->getIsLogin()){
-            return $this->redirect($this->generateUrl('homepage'));
-        }
-
         return $this->render("pages/login.html.twig");
     }
 
     /**
     *   @Route("/homepage", name="homepage")
     */
-    public function loadHomepage(UserInterface $user): Response
+    public function loadHomepage(): Response
     {
-        $username = $user->getUsername();
+        // $username = $user->getUsername();
         
-        if ($user->getIsLogin()) {
+        if (true) {
             return $this->render("pages/home.html.twig", ["username" => $username]);
         } else {
             return $this->redirect($this->generateUrl('login_page'));
@@ -38,9 +33,8 @@ class LoginController extends AbstractController
     /**
     *   @Route("/logout", name="logout")
     */
-    public function logout(UserInterface $user)
+    public function logout()
     {
-        $user->setIsLogin(false);
         return $this->redirect($this->generateUrl('login_page'));
     }
 }
