@@ -20,8 +20,11 @@ security:
             # guard:
             #     authenticators:
             #         - App\Security\LoginAuthenticator
-            # logout:
-            #     path: app_logout
+            logout:
+                path: logout
+            guard:
+                authenticators:
+                    - App\Security\LoginAuthenticator
                 # where to redirect after logout
                 # target: app_any_route
 
