@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Register</title>
+    </head>
+    <body>
+        REGISTER:
+        <form method="post" action="{{ path('create_user') }}">
+            <div>
+                Username: <input type="text" name="reg_username"></input> <br>
+            </div>
+            <div>
+                Password: <input type="password" name="reg_password"></input> <br>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>
