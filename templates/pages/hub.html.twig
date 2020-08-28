@@ -5,7 +5,10 @@
     </head>
     <body>
         {% if user %}
-            <p>You are Logged in as {{ user.username }}</p>
+            <p>
+                You are Logged in as {{ user.username }} <br>
+                <a href="{{ path("app_logout") }}">Logout</a>
+            </p>
         {% endif %}
         <div>
             Select Where to go:<br>
