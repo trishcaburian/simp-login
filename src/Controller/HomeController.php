@@ -39,4 +39,12 @@ class HomeController extends AbstractController
         }
         
     }
+
+    /**
+    *   @Route("/hub", name="hub_page")
+    */
+    public function loadHubPage(): Response
+    {
+        return $this->render("pages/hub.html.twig", ['user' => $this->security->getUser()]);
+    }
 }

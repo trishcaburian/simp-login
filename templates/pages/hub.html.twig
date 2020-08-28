@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hub</title>
+    </head>
+    <body>
+        {% if user %}
+            <p>You are Logged in as {{ user.username }}</p>
+        {% endif %}
+        <div>
+            Select Where to go:<br>
+            <a href="{{ path('app_login') }}">Login</a><br>
+            <a href="{{ path('homepage') }}">Homepage</a><br>
+            <a href="{{ path('register_page') }}">Registration</a><br>
+        </div>
+    </body>
+</html>
