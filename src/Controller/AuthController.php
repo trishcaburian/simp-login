@@ -24,7 +24,7 @@ class AuthController extends AbstractController
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->render("pages/login.html.twig");
+        return $this->render("pages/login.html.twig", ['error_message' => NULL]);
     }
 
     /**

@@ -17,6 +17,9 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
+use Twig\Environment;
+use Symfony\Component\HttpFoundation\Response;
+
 class LoginAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
     use TargetPathTrait;
@@ -26,12 +29,14 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
     private $entityManager;
     private $urlGenerator;
     private $passwordEncoder;
+    private $twigEnvironment;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, UserPasswordEncoderInterface $passwordEncoder, Environment $twigEnvironment)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->passwordEncoder = $passwordEncoder;
+        $this->twigEnvironment = $twigEnvironment;
     }
 
     public function supports(Request $request)
@@ -76,9 +81,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        echo "<script>alert('Invalid Username/Password. Please try again.');</script>";
-
-        header("Location: ".$this->urlGenerator->generate('app_login'));
+        return new Response($this->twigEnvironment->render('pages/login.html.twig', ['error_message' => 'Invalid Username or Password.']));
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)

@@ -2,6 +2,11 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
+    {% if error_message %}
+        <div>
+            {{ error_message }}
+        </div>
+    {% endif %}
     <form method="post">
         <div>
             Username: <input type="text" name="username" required autofocus>
