@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Login</title>
-    </head>
-    <body>
-        <form method="post">
-            <div>
-                Username: <input type="text" name="username" required autofocus>
-            </div>
-            <div>
-                Password: <input type="password" name="password">
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+{% extends "base.html.twig" %}
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    <form method="post">
         <div>
-            <a href="{{ path('register_page') }}">Register!</a><br>
-            <a href="{{ path('hub_page') }}">Go Back to Hub</a>
+            Username: <input type="text" name="username" required autofocus>
         </div>
-    </body>
-</html>
+        <div>
+            Password: <input type="password" name="password">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <div>
+        <a href="{{ path('register_page') }}">Register!</a><br>
+        <a href="{{ path('hub_page') }}">Go Back to Hub</a>
+    </div>
+{% endblock %}

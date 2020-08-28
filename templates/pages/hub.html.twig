@@ -1,20 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Hub</title>
-    </head>
-    <body>
-        {% if user %}
-            <p>
-                You are Logged in as {{ user.username }} <br>
-                <a href="{{ path("app_logout") }}">Logout</a>
-            </p>
-        {% endif %}
-        <div>
-            Select Where to go:<br>
-            <a href="{{ path('app_login') }}" target="_blank">Login</a><br>
-            <a href="{{ path('homepage') }}" target="_blank">Homepage</a><br>
-            <a href="{{ path('register_page') }}" target="_blank">Registration</a><br>
-        </div>
-    </body>
-</html>
+{% extends "base.html.twig" %}
+
+{% block title %}Hub{% endblock %}
+
+{% block body %}
+    {% if user %}
+        <p>
+            You are Logged in as {{ user.username }} <br>
+            <a href="{{ path("app_logout") }}">Logout</a>
+        </p>
+    {% endif %}
+    <div>
+        Select Where to go:<br>
+        <a href="{{ path('app_login') }}" target="_blank">Login</a><br>
+        <a href="{{ path('homepage') }}" target="_blank">Homepage</a><br>
+        <a href="{{ path('register_page') }}" target="_blank">Registration</a><br>
+    </div>
+{% endblock %}

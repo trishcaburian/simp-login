@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Register</title>
-    </head>
-    <body>
-        REGISTER:
-        <form method="post" action="{{ path('create_user') }}">
-            <div>
-                Username: <input type="text" name="reg_username"><br>
-            </div>
-            <div>
-                Password: <input type="password" name="reg_password"><br>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+{% extends "base.html.twig" %}
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    REGISTER:
+    <form method="post" action="{{ path('create_user') }}">
         <div>
-            <a href="{{ path('app_login') }}">Back to Login</a>
+            Username: <input type="text" name="reg_username"><br>
         </div>
-    </body>
-</html>
+        <div>
+            Password: <input type="password" name="reg_password"><br>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <div>
+        <a href="{{ path('app_login') }}">Back to Login</a>
+    </div>
+{% endblock %}
