@@ -16,28 +16,14 @@ class HomeController extends AbstractController
     }
 
     /**
-    *   @Route("/", name="neutral_page")
-    */
-    public function index() 
-    {
-        //move with homepage to a new controller later
-        return $this->redirect($this->generateUrl('app_login'));
-
-    }
-
-    /**
     *   @Route("/homepage", name="homepage")
     */
-    public function loadHomepage(): Response
+    public function index(): Response
     {
         $user = $this->security->getUser();
         
-        if (!is_null($user)) {
-            return $this->render("pages/home.html.twig", ['username' => $user->getUsername()]);
-        } else {
-            return $this->redirect($this->generateUrl('app_login'));
-        }
-        
+        return $this->render("pages/home.html.twig", ['username' => $user->getUsername()]);
+
     }
 
     /**
