@@ -33,4 +33,12 @@ class HomeController extends AbstractController
     {
         return $this->render("pages/hub.html.twig", ['user' => $this->security->getUser()]);
     }
+
+    /**
+     *  @Route("/register", name="register_page")
+    */
+    public function loadRegisterPage()
+    {
+        return $this->render("pages/register.html.twig", ['notification' => NULL]);
+    }
 }
