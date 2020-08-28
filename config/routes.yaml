@@ -2,25 +2,6 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-#login_page:
-    #path: /login
-    #controller: App\Controller\Controller::checkLogin
-    #controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
-    #defaults:
-    #    template: 'pages/login.html.twig'
-
-# login_page:
-#     path: /login
-#     controller: App\Controller\LoginController::loginPage
-
-# verify_login:
-#     path: /homepage
-#     controller: App\Controller\LoginController::checkLogin
-
-# logout:
-#     path: /logout
-#     controller: App\Controller\Controller::logout
-
 register_page:
     path: /register
     controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
