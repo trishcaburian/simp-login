@@ -24,6 +24,12 @@ class UserModel
 
         $username = $request->request->get('reg_username');
 
+        if ($this->isExistingUsername($username))
+        {
+            array_push($messages, ['message' => 'Username already exists. Please use another.']);
+            return $messages;
+        }
+
         $user = new User();
         $user->setUsername($username);
         $user->setPassword($request->request->get('reg_password'));
@@ -43,5 +49,16 @@ class UserModel
         }
 
         return $messages;
+    }
+
+    private function isExistingUsername($username)
+    {
+        $result = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $username]);
+
+        if (!empty($result) || !is_null($result)) {
+            return true;
+        }
+
+        return false;
     }
 }
