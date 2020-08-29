@@ -24,9 +24,8 @@ class UserController extends AbstractController
     */
     public function createUser(Request $request)
     {
-        $errors = $this->userModel->addUser($request);
+        $messages = $this->userModel->addUser($request);
         
-        $message = "Added user: ".$request->request->get('reg_username');; 
-        return new Response($this->twigEnvironment->render('pages/register.html.twig', ['notification' => $message]));
+        return new Response($this->twigEnvironment->render('pages/register.html.twig', ['messages' => $messages]));
     }
 }

@@ -2,8 +2,12 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    {% if notification %}
-        <div>{{ notification }}</div>
+    {% if messages|length > 0 %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message.message }}</li>
+            {% endfor %}
+        </ul>
     {% endif %}
     REGISTER:
     <form method="post" action="{{ path('create_user') }}">
