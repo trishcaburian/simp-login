@@ -3,6 +3,7 @@
 
 {% block body %}
     {% if notification %}
+        <div>{{ notification }}</div>
     {% endif %}
     REGISTER:
     <form method="post" action="{{ path('create_user') }}">
