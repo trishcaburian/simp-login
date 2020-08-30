@@ -51,6 +51,16 @@ class UserModel
         return $messages;
     }
 
+    public function addAdmin(User $requester, Request $request)
+    {
+        $messages = [];
+
+        if (!in_array('ROLE_ADMIN', $requester->getRoles())) {
+            array_push($messages, ['message' => 'You do not have access to this action.']);
+            return $messages;
+        }
+    }
+
     private function isExistingUsername($username)
     {
         $result = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $username]);
