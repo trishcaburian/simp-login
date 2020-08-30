@@ -22,7 +22,7 @@ security:
             guard:
                 authenticators:
                     - App\Security\LoginAuthenticator
-
+            access_denied_handler: App\Security\AccessDeniedHandler
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
