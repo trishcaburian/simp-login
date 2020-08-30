@@ -4,7 +4,7 @@
 {% block body %}
     Welcome {% if is_granted('ROLE_ADMIN') %}Admin{% endif %} {{ username }}! <br>
     {% if is_granted('ROLE_ADMIN') %}
-        <a href="www.google.com">Admin Controls</a> <br>
+        <a href="{{ path("admin_page") }}">Admin Page</a> <br>
     {% endif %}
     <a href="{{ path("app_logout") }}">Logout</a>
 {% endblock %}
