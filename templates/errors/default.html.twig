@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+{% block title %}Oops!{% endblock %}
+
+{% block body %}
+    <div>
+        {% if error_message %}
+            {{ error_message }}
+        {% else %}
+            Oops! Something went wrong!
+        {% endif %}
+    </div>
+    <a href="{{ path("homepage") }}">Return Home</a>
+{% endblock %}

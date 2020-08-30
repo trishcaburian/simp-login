@@ -34,4 +34,12 @@ class AuthController extends AbstractController
     {
         return $this->redirect($this->generateUrl('app_login'));
     }
+
+    /**
+    *   @Route("/error_page", name="error_page")
+    */
+    public function errorPage()
+    {
+        return $this->render("errors/default.html.twig", ['error_message' => NULL]);
+    }
 }
