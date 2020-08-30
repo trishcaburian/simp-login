@@ -2,6 +2,9 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-    Welcome {{ username }}! <br>
+    Welcome {% if is_granted('ROLE_ADMIN') %}Admin{% endif %} {{ username }}! <br>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="www.google.com">Admin Controls</a> <br>
+    {% endif %}
     <a href="{{ path("app_logout") }}">Logout</a>
 {% endblock %}
