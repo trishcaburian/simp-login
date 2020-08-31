@@ -32,12 +32,12 @@ class UserController extends AbstractController
     /**
     *   @Route("/add_user_admin", name="add_user_admin")
     */
-    public function giveUserAdminRights(Request $request)
+    public function giveAdminRights(Request $request)
     {
         $user = $this->security->getUser();
 
         $messages = $this->userModel->addAdmin($user, $request);
-
-        return $this->render('pages/admin_dash.html.twig', ['messages' => $messages]);
+        
+        return new Response(json_encode($messages));
     }
 }

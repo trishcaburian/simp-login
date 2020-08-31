@@ -33,6 +33,7 @@ class UserModel
         $user = new User();
         $user->setUsername($username);
         $user->setPassword($request->request->get('reg_password'));
+        $user->setRoles(['ROLE_USER']);
 
         $errors = $this->validator->validate($user);
 
@@ -59,6 +60,31 @@ class UserModel
             array_push($messages, ['message' => 'You do not have access to this action.']);
             return $messages;
         }
+        
+        $users = $request->request->get('user');
+
+        if(count($users) > 0) {
+            for ($i=0; $i < count($users); $i++) { 
+                $user = $this->entityManager->getRepository(User::class)->findOneBy(['id' => $users[$i]]);
+
+                $roles = $user->getRoles();
+                array_push($roles, 'ROLE_ADMIN');
+                $user->setRoles($roles);
+                $this->entityManager->flush();
+
+                array_push($messages, ['message' => $user->getUsername().' now has Admin role!']);
+            }
+            return $messages;
+        } else {
+            return ['message' => NULL];
+        }
+    }
+
+    public function getNonAdminUsers()
+    {
+        $sql = 'SELECT * FROM user WHERE roles NOT LIKE "%ROLE_ADMIN%"';
+
+        return $this->genericSQL($sql);
     }
 
     private function isExistingUsername($username)
@@ -70,5 +96,15 @@ class UserModel
         }
 
         return false;
+    }
+
+    private function genericSQL($sql)
+    {
+        $conn = $this->entityManager->getConnection();
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
     }
 }

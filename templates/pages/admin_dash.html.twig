@@ -6,7 +6,7 @@
     <a href="{{ path("homepage") }}">Back to Home</a>
 
     <div>
-        <form method="post">
+        <form method="post" action="{{ path('add_user_admin') }}">
             <table>
                 <tr>
                     <th>Username</th>
@@ -16,7 +16,7 @@
                     <tr>
                         <td>{{ user.username }}</td>
                         <td>
-                            <input type="checkbox" value="{{ user.id }}">
+                            <input type="checkbox" name="user[]" value="{{ user.id }}">
                         </td>
                     </tr>
                 {% endfor %}

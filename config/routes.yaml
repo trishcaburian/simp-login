@@ -2,8 +2,8 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-admin_page:
-    path: /admin/message
-    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
-    defaults:
-       template: 'pages/admin_dash.html.twig'
+# admin_page:
+#     path: /admin/message
+#     controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+#     defaults:
+#        template: 'pages/admin_dash.html.twig'
