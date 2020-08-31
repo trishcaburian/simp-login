@@ -38,6 +38,10 @@ class UserController extends AbstractController
     */
     public function giveAdminRights(Request $request)
     {
+        if (is_null($request->headers->get('referer'))) {
+            return $this->render('errors/default.html.twig', ['error_message' => 'Sorry, direct access to this page is not allowed.']);
+        }
+        
         $user = $this->security->getUser();
 
         $messages = $this->userModel->addAdmin($user, $request);
