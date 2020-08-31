@@ -7,6 +7,21 @@
 
     <div>
         <form method="post">
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <th>Give an Admin Role?</th>
+                </tr>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>
+                            <input type="checkbox" value="{{ user.id }}">
+                        </td>
+                    </tr>
+                {% endfor %}
+            <table>
+            <button type="submit">Submit</button>
         </form>
     </div>
 {% endblock %}
