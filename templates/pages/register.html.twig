@@ -34,18 +34,16 @@
         if (msg_list !== null) {
             msg_list.parentNode.removeChild(msg_list);
         }
-        
+
         $.ajax({
             url: '{{ path("create_user") }}',
             type: 'post',
             data:$('#registerForm').serialize(),
             success:function(result){
-                // Whatever you want to do after the form is successfully submitted
-                console.log(result);
                 document.querySelector('#messages').insertAdjacentHTML('beforeend', result);
             },
-            error: function(){
-                console.log('Error');
+            error: function(result){
+                console.log(result);
             }
         });
     });
