@@ -52,6 +52,6 @@ class UserController extends AbstractController
 
         $messages = $this->userModel->addAdmin($user, $request);
         
-        return new Response(json_encode($messages));
+        return $this->render('mini/message.html.twig', ['messages' => $messages]);;
     }
 }

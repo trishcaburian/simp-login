@@ -1,12 +1,18 @@
 {% extends "base.html.twig" %}
 {% block title %}Admin Controls{% endblock %}
 
+{% block js_libraries %}
+<script src="/assets/js/jquery-3.5.1.min.js"></script>
+{% endblock %}
+
 {% block body %}
     If you can see this you are an admin! :) <br>
-    <a href="{{ path("homepage") }}">Back to Home</a>
+    <a href="{{ path("homepage") }}">Back to Home</a> 
+
+    <div id="messages"></div>
 
     <div>
-        <form method="post" action="{{ path('add_user_admin') }}">
+        <form method="post" id="promoteForm">
             <table>
                 <tr>
                     <th>Username</th>
@@ -24,4 +30,33 @@
             <button type="submit">Submit</button>
         </form>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="/assets/js/form_scripts.js"></script>
+<script>
+
+    $('#promoteForm').submit(function(e){
+        e.preventDefault();
+
+        var msg_list = document.querySelector('#msg_list');
+
+        if (msg_list !== null) {
+            msg_list.parentNode.removeChild(msg_list);
+        }
+        
+        $.ajax({
+            url: '{{ path("add_user_admin") }}',
+            type: 'post',
+            data:$('#promoteForm').serialize(),
+            success:function(result){
+                document.querySelector('#messages').insertAdjacentHTML('beforeend', result);
+            },
+            error: function(result){
+                console.log(result);
+            }
+        });
+    });
+
+</script>
 {% endblock %}
