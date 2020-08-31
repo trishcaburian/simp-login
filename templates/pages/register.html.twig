@@ -1,25 +1,54 @@
 {% extends "base.html.twig" %}
 {% block title %}Register{% endblock %}
 
+{% block js_libraries %}
+<script src="/assets/js/jquery-3.5.1.min.js"></script>
+{% endblock %}
+
 {% block body %}
-    {% if messages is defined and messages|length > 0 %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message.message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <div id="messages"></div>
     REGISTER:
-    <form method="post" action="{{ path('create_user') }}">
+    <form method="post" id="registerForm">
         <div>
             Username: <input type="text" name="reg_username"><br>
         </div>
         <div>
             Password: <input type="password" name="reg_password"><br>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" id="create_user">Submit</button>
     </form>
     <div>
         <a href="{{ path('app_login') }}">Back to Login</a>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="/assets/js/form_scripts.js"></script>
+<script>
+
+    $('#registerForm').submit(function(e){
+        e.preventDefault();
+
+        var msg_list = document.querySelector('#msg_list');
+
+        if (msg_list !== null) {
+            msg_list.parentNode.removeChild(msg_list);
+        }
+        
+        $.ajax({
+            url: '{{ path("create_user") }}',
+            type: 'post',
+            data:$('#registerForm').serialize(),
+            success:function(result){
+                // Whatever you want to do after the form is successfully submitted
+                console.log(result);
+                document.querySelector('#messages').insertAdjacentHTML('beforeend', result);
+            },
+            error: function(){
+                console.log('Error');
+            }
+        });
+    });
+
+</script>
 {% endblock %}

@@ -1,0 +1,7 @@
+{% if messages is defined and messages|length > 0 %}
+    <ul id="msg_list">
+        {% for message in messages %}
+            <li>{{ message.message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
