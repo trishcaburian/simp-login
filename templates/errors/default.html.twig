@@ -3,7 +3,7 @@
 
 {% block body %}
     <div>
-        {% if error_message %}
+        {% if error_message is defined %}
             {{ error_message }}
         {% else %}
             Oops! Something went wrong!

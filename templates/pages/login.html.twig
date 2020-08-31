@@ -2,7 +2,7 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
-    {% if error_message %}
+    {% if error_message is defined %}
         <div>
             {{ error_message }}
         </div>

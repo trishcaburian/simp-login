@@ -3,7 +3,7 @@
 {% block title %}Hub{% endblock %}
 
 {% block body %}
-    {% if user %}
+    {% if user.username is defined %}
         <p>
             You are Logged in as {{ user.username }} <br>
             <a href="{{ path("app_logout") }}">Logout</a>

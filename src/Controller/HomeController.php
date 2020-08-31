@@ -39,6 +39,6 @@ class HomeController extends AbstractController
     */
     public function loadRegisterPage()
     {
-        return $this->render("pages/register.html.twig", ['messages' => []]);
+        return $this->render("pages/register.html.twig");
     }
 }

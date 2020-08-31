@@ -24,7 +24,7 @@ class AuthController extends AbstractController
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->render("pages/login.html.twig", ['error_message' => NULL]);
+        return $this->render("pages/login.html.twig");
     }
 
     /**
@@ -40,6 +40,6 @@ class AuthController extends AbstractController
     */
     public function errorPage()
     {
-        return $this->render("errors/default.html.twig", ['error_message' => NULL]);
+        return $this->render("errors/default.html.twig");
     }
 }

@@ -2,7 +2,7 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    {% if messages|length > 0 %}
+    {% if messages is defined and messages|length > 0 %}
         <ul>
             {% for message in messages %}
                 <li>{{ message.message }}</li>
