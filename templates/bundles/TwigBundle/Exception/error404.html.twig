@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+{% block title %}Page Not Found{% endblock %}
+
+{% block body %}
+    <h1 color="red">404 Page Not Found :(</h1>
+
+    <div>
+        Maybe the URL was misspelled? <br>
+        <a href="{{ path("homepage") }}">Back to Home</a>
+    </div>
+{% endblock %}
