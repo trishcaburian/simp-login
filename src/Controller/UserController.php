@@ -20,34 +20,20 @@ class UserController extends AbstractController
     }
 
     /**
-    *   @Route("/create_user", name="create_user")
+    *   @Route("/create_user", name="create_user", condition="request.isXmlHttpRequest()")
     */
     public function createUser(Request $request)
     {
-        if (is_null($request->headers->get('referer'))) {
-            return new Response(
-                $this->renderView('errors/default.html.twig', ['error_message' => 'Sorry, direct access to this page is not allowed.']),
-                403
-            );
-        }
-
         $messages = $this->userModel->addUser($request);
 
         return $this->render('mini/message.html.twig', ['messages' => $messages]);
     }
 
     /**
-    *   @Route("/admin/add_user_admin", name="add_user_admin")
+    *   @Route("/admin/add_user_admin", name="add_user_admin", condition="request.isXmlHttpRequest()")
     */
     public function giveAdminRights(Request $request)
     {
-        if (is_null($request->headers->get('referer'))) {
-            return new Response(
-                $this->renderView('errors/default.html.twig', ['error_message' => 'Sorry, direct access to this page is not allowed.']),
-                403
-            );
-        }
-        
         $user = $this->security->getUser();
 
         $messages = $this->userModel->addAdmin($user, $request);
