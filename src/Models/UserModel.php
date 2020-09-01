@@ -68,11 +68,17 @@ class UserModel
                 $user = $this->entityManager->getRepository(User::class)->findOneBy(['id' => $users[$i]]);
 
                 $roles = $user->getRoles();
+
+                if (in_array('ROLE_ADMIN', $roles)) {
+                    array_push($messages, ['message' => $user->getUsername().' already has the Admin role!']);
+                    continue;
+                }
+
                 array_push($roles, 'ROLE_ADMIN');
                 $user->setRoles($roles);
                 $this->entityManager->flush();
 
-                array_push($messages, ['message' => $user->getUsername().' now has Admin role!']);
+                array_push($messages, ['message' => $user->getUsername().' now has the Admin role!']);
             }
             return $messages;
         } else {
