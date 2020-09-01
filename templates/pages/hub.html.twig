@@ -13,6 +13,8 @@
         Select Where to go:<br>
         <a href="{{ path('app_login') }}" target="_blank">Login</a><br>
         <a href="{{ path('homepage') }}" target="_blank">Homepage</a><br>
-        <a href="{{ path('register_page') }}" target="_blank">Registration</a><br>
+        {% if not app.user %} 
+            <a href="{{ path('register_page') }}" target="_blank">Registration</a><br>
+        {% endif %}
     </div>
 {% endblock %}
