@@ -20,7 +20,7 @@ class UserController extends AbstractController
     }
 
     /**
-    *   @Route("/create_user", name="create_user", condition="request.isXmlHttpRequest()")
+    *   @Route("/register/create_user", name="create_user", condition="request.isXmlHttpRequest()")
     */
     public function createUser(Request $request)
     {
