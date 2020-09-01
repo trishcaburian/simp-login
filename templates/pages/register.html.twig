@@ -3,12 +3,13 @@
 
 {% block js_libraries %}
 <script src="/assets/js/jquery-3.5.1.min.js"></script>
+<script src="/assets/js/form_scripts.js"></script>
 {% endblock %}
 
 {% block body %}
     <div id="messages"></div>
     REGISTER:
-    <form method="post" id="registerForm">
+    <form method="post" id="siteForm">
         <div>
             Username: <input type="text" name="reg_username"><br>
         </div>
@@ -23,30 +24,9 @@
 {% endblock %}
 
 {% block javascripts %}
-<script src="/assets/js/form_scripts.js"></script>
 <script>
-
-    $('#registerForm').submit(function(e){
-        e.preventDefault();
-
-        var msg_list = document.querySelector('#msg_list');
-
-        if (msg_list !== null) {
-            msg_list.parentNode.removeChild(msg_list);
-        }
-
-        $.ajax({
-            url: '{{ path("create_user") }}',
-            type: 'post',
-            data:$('#registerForm').serialize(),
-            success:function(result){
-                document.querySelector('#messages').insertAdjacentHTML('beforeend', result);
-            },
-            error: function(result){
-                console.log(result);
-            }
-        });
+    $('#siteForm').submit(function(e){
+        submitRequest(e, '{{ path("create_user") }}');
     });
-
 </script>
 {% endblock %}

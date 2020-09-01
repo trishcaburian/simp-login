@@ -3,6 +3,7 @@
 
 {% block js_libraries %}
 <script src="/assets/js/jquery-3.5.1.min.js"></script>
+<script src="/assets/js/form_scripts.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -12,14 +13,14 @@
     <div id="messages"></div>
 
     <div>
-        <form method="post" id="promoteForm">
+        <form method="post" id="siteForm">
             <table>
                 <tr>
                     <th>Username</th>
                     <th>Give an Admin Role?</th>
                 </tr>
                 {% for user in users %}
-                    <tr>
+                    <tr id="row-{{ user.id }}">
                         <td>{{ user.username }}</td>
                         <td>
                             <input type="checkbox" name="user[]" value="{{ user.id }}">
@@ -33,29 +34,10 @@
 {% endblock %}
 
 {% block javascripts %}
-<script src="/assets/js/form_scripts.js"></script>
 <script>
 
-    $('#promoteForm').submit(function(e){
-        e.preventDefault();
-
-        var msg_list = document.querySelector('#msg_list');
-
-        if (msg_list !== null) {
-            msg_list.parentNode.removeChild(msg_list);
-        }
-        
-        $.ajax({
-            url: '{{ path("add_user_admin") }}',
-            type: 'post',
-            data:$('#promoteForm').serialize(),
-            success:function(result){
-                document.querySelector('#messages').insertAdjacentHTML('beforeend', result);
-            },
-            error: function(result){
-                console.log(result);
-            }
-        });
+    $('#siteForm').submit(function(e){
+        submitRequest(e, '{{ path("add_user_admin") }}');
     });
 
 </script>
