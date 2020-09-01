@@ -20,6 +20,6 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
     public function handle(Request $request, AccessDeniedException $accessDeniedException)
     {
         $message = "Sorry, this page is off limits! :(";
-        return new Response($this->twigEnvironment->render('errors/default.html.twig', ['error_message' => $message]), 403);
+        return new Response($this->twigEnvironment->render('bundles/TwigBundle/Exception/error.html.twig', ['error_message' => $message]), 403);
     }
 }
