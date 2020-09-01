@@ -1,10 +1,13 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Services\FormGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+
 
 class HomeController extends AbstractController
 {
@@ -39,6 +42,10 @@ class HomeController extends AbstractController
     */
     public function loadRegisterPage()
     {
-        return $this->render("pages/register.html.twig");
+        $user = new User();
+
+        $form = $this->createForm(FormGenerator::class, $user);
+
+        return $this->render("pages/register.html.twig", ['form' => $form->createView()]);
     }
 }
