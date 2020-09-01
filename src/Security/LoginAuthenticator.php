@@ -81,7 +81,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        return new Response($this->twigEnvironment->render('pages/login.html.twig', ['error_message' => 'Invalid Username or Password.']));
+        return new Response($this->twigEnvironment->render('pages/login.html.twig', ['message' => 'Invalid Username or Password.']));
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)

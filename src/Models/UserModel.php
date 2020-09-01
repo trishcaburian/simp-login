@@ -21,36 +21,33 @@ class UserModel
 
     public function addUser(Request $request)
     {
-        $messages =[];
-
-        $username = $request->request->get('reg_username');
+        $message = '';
+        $fields = $request->request->get('register');
+        $username = $fields['username'];
 
         if ($this->isExistingUsername($username))
         {
-            array_push($messages, ['message' => 'Username already exists. Please use another.']);
-            return $messages;
+            return 'Username already exists. Please use another.';
         }
 
         $user = new User();
         $user->setUsername($username);
-        $user->setPassword($request->request->get('reg_password'));
+        $user->setPassword($fields['password']);
         $user->setRoles(['ROLE_USER']);
 
         $errors = $this->validator->validate($user);
 
-        if (count($errors) > 0) {
-            $messages = $errors;
-        } else {
-            $user->setPassword($this->passEncoder->encodePassword($user, $request->request->get('reg_password')));
+        if (count($errors) == 0) {
+            $user->setPassword($this->passEncoder->encodePassword($user, $fields['password']));
             
             $this->entityManager->persist($user);
 
             $this->entityManager->flush();
 
-            array_push($messages, ['message' => "Added user: ".$request->request->get('reg_username')]);
+            $message = "Added user: ".$fields['username'];
         }
 
-        return $messages;
+        return $message;
     }
 
     public function addAdmin(User $requester, Request $request)

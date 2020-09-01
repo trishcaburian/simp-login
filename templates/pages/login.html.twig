@@ -2,9 +2,9 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
-    {% if error_message is defined %}
+    {% if message is defined %}
         <div>
-            {{ error_message }}
+            {{ message }}
         </div>
     {% endif %}
     <form method="post">

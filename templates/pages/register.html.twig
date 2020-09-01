@@ -7,30 +7,19 @@
 {% endblock %}
 
 {% block body %}
-{% if form is not defined %}
-    <div id="messages"></div>
+    {% if message is defined %}
+        <div>
+            {{ message }}
+        </div>
+        </br>
+    {% endif %}
+    
     REGISTER:
-    <form method="post" id="siteForm">
-        <div>
-            Username: <input type="text" name="reg_username"><br>
-        </div>
-        <div>
-            Password: <input type="password" name="reg_password"><br>
-        </div>
-        <button type="submit" id="create_user">Submit</button>
-    </form>
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+    {{ form(form, {'method': 'POST', 'attr': {'id': 'siteForm'}}) }}
+    <button type="submit" id="create_user" form="siteForm">Submit</button>
+
     <div>
         <a href="{{ path('app_login') }}">Back to Login</a>
     </div>
-{% else %}
-{{ form(form) }}
-{% endif %}
-{% endblock %}
-
-{% block javascripts %}
-<script>
-    $('#siteForm').submit(function(e){
-        submitRequest(e, '{{ path("create_user") }}');
-    });
-</script>
 {% endblock %}

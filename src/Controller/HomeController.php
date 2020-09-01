@@ -2,19 +2,22 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Services\FormGenerator;
+use App\Models\UserModel;
+use App\Services\RegisterType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
 
 class HomeController extends AbstractController
 {
-    private $security;
+    private $userModel, $security;
 
-    public function __construct(Security $security)
+    public function __construct(UserModel $userModel, Security $security)
     {
+        $this->userModel = $userModel;
         $this->security = $security;
     }
 
@@ -40,11 +43,17 @@ class HomeController extends AbstractController
     /**
      *  @Route("/register", name="register_page")
     */
-    public function loadRegisterPage()
+    public function loadRegisterPage(Request $request)
     {
         $user = new User();
 
-        $form = $this->createForm(FormGenerator::class, $user);
+        $form = $this->createForm(RegisterType::class, $user);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $message = $this->userModel->addUser($request);
+            return $this->render("pages/register.html.twig", ['form' => $form->createView(), 'message' => $message]);
+        }
 
         return $this->render("pages/register.html.twig", ['form' => $form->createView()]);
     }
