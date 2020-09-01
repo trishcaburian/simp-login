@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserModel
 {
+    private const ROLE_ADMIN = 'ROLE_ADMIN';
     private $entityManager, $passEncoder, $validator;
 
     public function __construct(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passEncoder, ValidatorInterface $validator)
@@ -56,7 +57,7 @@ class UserModel
     {
         $messages = [];
 
-        if (!in_array('ROLE_ADMIN', $requester->getRoles())) {
+        if (!in_array(self::ROLE_ADMIN, $requester->getRoles())) {
             array_push($messages, ['message' => 'You do not have access to this action.']);
             return $messages;
         }
@@ -69,12 +70,12 @@ class UserModel
 
                 $roles = $user->getRoles();
 
-                if (in_array('ROLE_ADMIN', $roles)) {
+                if (in_array(self::ROLE_ADMIN, $roles)) {
                     array_push($messages, ['message' => $user->getUsername().' already has the Admin role!']);
                     continue;
                 }
 
-                array_push($roles, 'ROLE_ADMIN');
+                array_push($roles, self::ROLE_ADMIN);
                 $user->setRoles($roles);
                 $this->entityManager->flush();
 
